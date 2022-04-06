@@ -1,3 +1,5 @@
-import { corra } from "./app";
+import app from "./app";
 
-console.log(corra);
+app.listen(app.get("port"));
+
+console.log(`Server on port ${app.get("port")}`);

@@ -1,9 +1,12 @@
+import config from "../config";
 import { Pool } from "pg";
 
-new Pool({
-  user: "postgres",
-  password: "",
-  host: "localhost",
-  port: "5432",
-  database: "database",
+const pool = new Pool({
+  user: config.userDb,
+  password: config.passwordDb,
+  host: config.hostDb,
+  port: config.portDb,
+  database: config.nameDb,
 });
+
+module.exports = pool;
