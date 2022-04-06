@@ -1,3 +1,4 @@
+import bcrypt from "bcrypt";
 import {
   sequelize,
   DataTypes,
@@ -5,7 +6,13 @@ import {
   Model,
 } from "./../database/connection";
 
-class User extends Model {}
+class User extends Model {
+  async hashPassword() {
+    const hash = await bcrypt.hash(this.password, 10);
+    console.log(hash);
+    this.password = hash;
+  }
+}
 
 User.init(
   {
@@ -26,7 +33,7 @@ User.init(
       defaultValue: "no-avatar.png",
     },
     type_user: {
-      type: Sequelize.ENUM("admin", "operator", "done"),
+      type: Sequelize.ENUM("admin", "operator"),
       allowNull: false,
     },
   },

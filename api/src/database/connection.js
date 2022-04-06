@@ -10,15 +10,5 @@ const sequelize = new Sequelize(
     dialect: "postgres",
   }
 );
-// const connect = async () => {
-//   try {
-//     await sequelize.authenticate();
-//     console.log("Connection has been established successfully");
-//     return sequelize;
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
 
-// export const db = connect();
 export { sequelize, DataTypes, Sequelize, Model };
