@@ -26,7 +26,6 @@ export const isUser = (bearer) => {
   return false;
 };
 
-
 export const currentUserOrAdmin = (bearer, req) => {
   const user = validateToken(bearer);
   if (user.typeUser === "admin" || user.id == req.params.id) {

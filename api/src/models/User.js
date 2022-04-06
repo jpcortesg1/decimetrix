@@ -7,9 +7,9 @@ import {
 } from "./../database/connection";
 
 class User extends Model {
-  async hashPassword() {
-    const hash = await bcrypt.hash(this.password, 10);
-    this.password = hash;
+  static async hashPassword(password) {
+    const hash = await bcrypt.hash(password, 10);
+    return hash;
   }
 
   async comparePassword(password) {

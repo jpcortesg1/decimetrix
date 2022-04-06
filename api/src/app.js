@@ -1,5 +1,6 @@
 // Required modules
 import express from "express";
+import fileUpload from "express-fileupload";
 import config from "./config";
 import usersRoutes from "./routes/users.routes";
 import authRoutes from "./routes/auth.routes";
@@ -13,6 +14,12 @@ app.set("port", config.port || 3000);
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(
+  fileUpload({
+    useTempFiles: true,
+    tempFileDir: "./src/upload",
+  })
+);
 
 // Routes
 app.use(authRoutes);

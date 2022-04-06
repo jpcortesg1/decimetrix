@@ -6,7 +6,8 @@ export const createUser = async (req, res) => {
   try {
     const { params } = req;
     const newUser = User.build(params);
-    await newUser.hashPassword();
+    const hash = await User.hashPassword(newUser.password);
+    newUser.password = hash;
     const user = await newUser.save();
     return res.status(200).json(user);
   } catch (error) {

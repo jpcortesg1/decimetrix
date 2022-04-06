@@ -77,6 +77,29 @@ export const validateLogin = [
   },
 ];
 
+export const validateUpdate = [
+  checkUsername,
+  check("password")
+    .optional()
+    .notEmpty()
+    .isLength({ min: 5, max: 50 })
+    .withMessage("The password must have 5 characters minimum up to 50"),
+  check("photo").optional().notEmpty(),
+  check("email").exists().notEmpty().isEmail(),
+  check("typeUser")
+    .exists()
+    .notEmpty()
+    .custom((value, { req }) => {
+      if (value !== "admin" && value !== "operator") {
+        throw new Error("Type of user no validate");
+      }
+      return true;
+    }),
+  (req, res, next) => {
+    validateResult(req, res, next);
+  },
+];
+
 export const verifyUser = (req, res, next) => {
   try {
     const bearerHeader = req.headers["authorization"];
