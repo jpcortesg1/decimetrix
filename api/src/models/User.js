@@ -9,8 +9,12 @@ import {
 class User extends Model {
   async hashPassword() {
     const hash = await bcrypt.hash(this.password, 10);
-    console.log(hash);
     this.password = hash;
+  }
+
+  async comparePassword(password) {
+    const match = await bcrypt.compare(password, this.password);
+    return match;
   }
 }
 
@@ -19,6 +23,7 @@ User.init(
     username: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true,
     },
     password: {
       type: DataTypes.STRING,
@@ -27,6 +32,7 @@ User.init(
     email: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true,
     },
     image: {
       type: DataTypes.STRING,

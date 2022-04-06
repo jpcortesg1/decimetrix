@@ -9,6 +9,7 @@ const passwordDb = process.env.PASSWORD_DB || "";
 const hostDb = process.env.HOST_DB || "";
 const portDb = process.env.PORT_DB || "";
 const nameDb = process.env.NAME_DB || "";
+const secretKey = process.env.SECRET_KEY || "secretkey";
 
 export default {
   port,
@@ -17,4 +18,5 @@ export default {
   hostDb,
   portDb,
   nameDb,
+  secretKey,
 };
