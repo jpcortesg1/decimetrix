@@ -2,6 +2,7 @@
 import express from "express";
 import config from "./config";
 import usersRoutes from "./routes/users.routes";
+import authRoutes from "./routes/auth.routes";
 
 // Create app
 const app = express();
@@ -15,5 +16,6 @@ app.use(express.urlencoded({ extended: false }));
 
 // Routes
 app.use(usersRoutes);
+app.use(authRoutes);
 
 export default app;

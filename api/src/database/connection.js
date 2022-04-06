@@ -1,12 +1,24 @@
 import config from "../config";
-import { Pool } from "pg";
+import { Sequelize, DataTypes, Model } from "sequelize";
 
-const pool = new Pool({
-  user: config.userDb,
-  password: config.passwordDb,
-  host: config.hostDb,
-  port: config.portDb,
-  database: config.nameDb,
-});
+const sequelize = new Sequelize(
+  config.nameDb,
+  config.userDb,
+  config.passwordDb,
+  {
+    host: config.hostDb,
+    dialect: "postgres",
+  }
+);
+// const connect = async () => {
+//   try {
+//     await sequelize.authenticate();
+//     console.log("Connection has been established successfully");
+//     return sequelize;
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
 
-module.exports = pool;
+// export const db = connect();
+export { sequelize, DataTypes, Sequelize, Model };
