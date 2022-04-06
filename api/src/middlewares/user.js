@@ -1,5 +1,5 @@
 import { check } from "express-validator";
-import validateResult from "./../helpers/validateHelper";
+import { validateResult, isUser, currentUserOrAdmin } from "./../helpers";
 import User from "./../models/User";
 
 const checkUsername = check("username")
@@ -76,3 +76,44 @@ export const validateLogin = [
     validateResult(req, res, next);
   },
 ];
+
+export const verifyUser = (req, res, next) => {
+  try {
+    const bearerHeader = req.headers["authorization"];
+    const user = isUser(bearerHeader, req);
+    if (user) {
+      next();
+      return;
+    }
+  } catch (error) {
+    return res.status(403).json([
+      {
+        value: req.headers["authorization"],
+        msg: "you don't have the credentials",
+        param: "token",
+        location: "headers",
+      },
+    ]);
+  }
+};
+
+export const verifyUserOrAdmin = (req, res, next) => {
+  try {
+    const bearerHeader = req.headers["authorization"];
+    const user = currentUserOrAdmin(bearerHeader, req);
+    if (user) {
+      next();
+      return;
+    }
+    throw new Error();
+  } catch (error) {
+    return res.status(403).json([
+      {
+        value: req.headers["authorization"],
+        msg: "you don't have the credentials",
+        param: "token",
+        location: "headers",
+      },
+    ]);
+  }
+};

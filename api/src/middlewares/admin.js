@@ -1,10 +1,9 @@
-import { isAdmin } from "./../helpers/verifyTokenHerlpers";
+import { isAdmin } from "./../helpers";
 
 export const verifyAdmin = (req, res, next) => {
   try {
     const bearerHeader = req.headers["authorization"];
     const admin = isAdmin(bearerHeader);
-    console.log(admin);
     if (admin) {
       next();
       return;

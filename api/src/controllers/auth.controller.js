@@ -17,7 +17,6 @@ export const createUser = async (req, res) => {
 export const login = async (req, res) => {
   try {
     const { user } = req;
-
     const response = await user.comparePassword(req.body.password);
     if (!response) {
       return res.status(403).json([
@@ -29,15 +28,12 @@ export const login = async (req, res) => {
         },
       ]);
     }
-
     const token = jwt.sign(
       { id: user.id, typeUser: user.type_user },
       config.secretKey
     );
     return res.status(200).json(token);
   } catch (error) {
-    console.log(error);
-    console.log(error);
     return res.status(500).json(error.message);
   }
 };

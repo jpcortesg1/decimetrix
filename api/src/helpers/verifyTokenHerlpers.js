@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 import config from "./../config";
 
-const validateToken = (bearer) => {
+export const validateToken = (bearer) => {
   if (bearer) {
     const token = bearer.split(" ")[1];
     if (token) {
@@ -15,5 +15,22 @@ const validateToken = (bearer) => {
 export const isAdmin = (bearer) => {
   const user = validateToken(bearer);
   if (user.typeUser === "admin") return true;
+  return false;
+};
+
+export const isUser = (bearer) => {
+  const user = validateToken(bearer);
+  if (user.typeUser === "admin" || user.typeUser === "operator") {
+    return true;
+  }
+  return false;
+};
+
+
+export const currentUserOrAdmin = (bearer, req) => {
+  const user = validateToken(bearer);
+  if (user.typeUser === "admin" || user.id == req.params.id) {
+    return true;
+  }
   return false;
 };

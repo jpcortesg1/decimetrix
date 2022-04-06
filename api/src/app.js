@@ -15,7 +15,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // Routes
-app.use(usersRoutes);
 app.use(authRoutes);
+app.use(usersRoutes);
 
 export default app;
