@@ -18,9 +18,10 @@ export const isAdmin = (bearer) => {
   return false;
 };
 
-export const isUser = (bearer) => {
+export const isUser = (bearer, req) => {
   const user = validateToken(bearer);
   if (user.typeUser === "admin" || user.typeUser === "operator") {
+    req.user = user;
     return true;
   }
   return false;

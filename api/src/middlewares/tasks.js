@@ -1,19 +1,21 @@
 import { check } from "express-validator";
 import Task from "./../models/Task";
 import User from "./../models/User";
-import { validateResult } from "./../helpers";
+import { validateResult, isUser, validateToken } from "./../helpers";
+
+const checkStatus = check("status")
+  .exists()
+  .notEmpty()
+  .custom((value, { req }) => {
+    if (value !== "todo" && value !== "inprogress" && value !== "done") {
+      throw new Error("Type of status no validate");
+    }
+    return true;
+  });
 
 export const validateCreateTask = [
   check("message").exists().notEmpty(),
-  check("status")
-    .exists()
-    .notEmpty()
-    .custom((value, { req }) => {
-      if (value !== "todo" && value !== "inprogress" && value !== "done") {
-        throw new Error("Type of status no validate");
-      }
-      return true;
-    }),
+  checkStatus,
   check("createdBy")
     .exists()
     .notEmpty()
@@ -40,3 +42,36 @@ export const validateCreateTask = [
     validateResult(req, res, next);
   },
 ];
+
+export const validateUpdateStatus = [
+  checkStatus,
+  (req, res, next) => {
+    validateResult(req, res, next);
+  },
+];
+
+export const verifyTaskUser = async (req, res, next) => {
+  try {
+    const bearerHeader = req.headers["authorization"];
+    const user = isUser(bearerHeader, req);
+    if (user) {
+      const { id: idUser } = req.user;
+      const { id } = req.params;
+      const task = await Task.findByPk(id);
+      if (task.assigned_to === idUser) {
+        next();
+        return;
+      }
+    }
+    throw new Error();
+  } catch (error) {
+    return res.status(403).json([
+      {
+        value: req.headers["authorization"],
+        msg: "you don't have the credentials",
+        param: "token",
+        location: "headers",
+      },
+    ]);
+  }
+};
