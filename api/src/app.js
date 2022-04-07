@@ -3,6 +3,7 @@ import express from "express";
 import fileUpload from "express-fileupload";
 import config from "./config";
 import usersRoutes from "./routes/users.routes";
+import tasksRoutes from "./routes/tasks.routes";
 import authRoutes from "./routes/auth.routes";
 
 // Create app
@@ -24,5 +25,6 @@ app.use(
 // Routes
 app.use(authRoutes);
 app.use(usersRoutes);
+app.use(tasksRoutes);
 
 export default app;
