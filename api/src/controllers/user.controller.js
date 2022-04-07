@@ -47,3 +47,17 @@ export const putUser = async (req, res) => {
     return res.status(500).json(error.message);
   }
 };
+
+export const deleteUser = async (req, res) => {
+  try {
+    const { id } = req.params;
+    await User.destroy({
+      where: {
+        id,
+      },
+    });
+    return res.status(200).json("User deleted");
+  } catch (error) {
+    return res.status(500).json(error.message);
+  }
+};

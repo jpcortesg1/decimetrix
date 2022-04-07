@@ -4,7 +4,12 @@ import {
   verifyUserOrAdmin,
   validateUpdate,
 } from "./../middlewares";
-import { getUsers, getUser, putUser } from "./../controllers/user.controller";
+import {
+  getUsers,
+  getUser,
+  putUser,
+  deleteUser,
+} from "./../controllers/user.controller";
 
 const router = Router();
 
@@ -14,6 +19,6 @@ router.get("/users/:id", verifyUserOrAdmin, getUser);
 
 router.put("/users/:id", verifyUserOrAdmin, validateUpdate, putUser);
 
-router.delete("/users/:id");
+router.delete("/users/:id", verifyUserOrAdmin, deleteUser);
 
 export default router;
