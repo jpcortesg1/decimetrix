@@ -55,10 +55,10 @@ export const verifyTaskUser = async (req, res, next) => {
     const bearerHeader = req.headers["authorization"];
     const user = isUser(bearerHeader, req);
     if (user) {
-      const { id: idUser } = req.user;
+      const { id: idUser, typeUser } = req.user;
       const { id } = req.params;
       const task = await Task.findByPk(id);
-      if (task.assigned_to === idUser) {
+      if (task.assigned_to === idUser || typeUser === "admin") {
         next();
         return;
       }

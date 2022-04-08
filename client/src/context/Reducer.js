@@ -20,6 +20,13 @@ const Reducer = (state, action) => {
         error: true,
       };
 
+    case "LOGOUT":
+      return {
+        ...state,
+        isFetching: false,
+        token: null,
+      };
+
     default:
       return state;
   }

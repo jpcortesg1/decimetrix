@@ -5,34 +5,40 @@ import jwt_decode from "jwt-decode";
 import "./layout.css";
 
 const Layout = ({ children }) => {
-  const { token } = useContext(Context);
+  const { token, dispatch } = useContext(Context);
   const { id, typeUser } = jwt_decode(token);
+
+  const handleLogout = () => {
+    console.log("token")
+    dispatch({ type: "LOGOUT" });
+  };
   return (
     <>
-      <nav className="navbar navbar-dark bg-dark py-3">
+      <nav className="navbar navbar-dark bg-dark py-3 sticky-md-top">
         <div className="container d-flex">
           <Link className="link" to="/">
-            <span className="navbar-brand" href="#">
+            <span className="navbar-brand fs-4" href="#">
               Decimetrix
             </span>
           </Link>
 
-          <div className="d-flex">
-            <Link className="link" to="/">
-              <span className="navbar-brand" href="#">
+          <div className="d-flex align-items-center">
+            <Link className="link" to="/profile">
+              <span className="navbar-brand fs-4" href="#">
                 Account
               </span>
             </Link>
-            <Link className="link" to="/">
-              <span className="navbar-brand" href="#">
-                Logout
-              </span>
-            </Link>
+            <button
+              className="btn btn-dark navbar-brand fs-4"
+              onClick={handleLogout}
+            >
+              Logout
+            </button>
           </div>
         </div>
       </nav>
       <div className="d-flex">
-        <div className="col-md-2 sidebar bg-dark text-light shadow">
+        <div className="col-md-2 sidebar bg-dark text-light shadow sticky-top">
           <div className="container pt-5">
             <div className="d-flex flex-column justify-content-center">
               {typeUser === "admin" && (
@@ -70,7 +76,7 @@ const Layout = ({ children }) => {
                   <Link className="link mb-2" to={`/tasks/${id}`}>
                     <span className="navbar-brand fs-5">
                       <i className="fa-solid fa-file me-2"></i>
-                      Profile
+                      Task Report
                     </span>
                   </Link>
                 </>

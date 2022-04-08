@@ -38,14 +38,18 @@ export const getUser = async (req, res) => {
 export const putUser = async (req, res) => {
   try {
     const { id } = req.params;
-    const { photo } = req.files;
-    const { username, email, password, typeUser } = req.body;
+    let photo;
+    if (req.files) {
+      const files = req.files;
+      photo = files.photo;
+    }
+    const { username, email, password } = req.body;
     const paramsUpdate = {
       username,
       email,
-      typeUser,
     };
     if (photo) {
+      console.log(photo);
       paramsUpdate.image = `${photo.tempFilePath}${photo.name}`;
       fs.renameSync(photo.tempFilePath, `${photo.tempFilePath}${photo.name}`);
     }

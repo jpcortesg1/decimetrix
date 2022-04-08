@@ -1,0 +1,11 @@
+.imageProfile {
+  max-height: 15rem !important;
+}
+
+.imageInput {
+  display: none;
+}
+
+.editImage {
+  cursor: pointer;
+}

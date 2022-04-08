@@ -6,6 +6,8 @@ import {
   Model,
 } from "./../database/connection";
 
+import Task from "./Task";
+
 class User extends Model {
   static async hashPassword(password) {
     const hash = await bcrypt.hash(password, 10);
@@ -51,5 +53,11 @@ User.init(
     updatedAt: "updatedat",
   }
 );
+
+// User.hasMany(Task, { as: "tasks" });
+Task.belongsTo(User, {
+  foreignKey: "assigned_to",
+  as: "users",
+});
 
 export default User;

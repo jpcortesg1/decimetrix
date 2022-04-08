@@ -7,6 +7,8 @@ import Layout from "./pages/layout/Layout";
 import Login from "./pages/login/Login";
 import Register from "./pages/register/Register";
 import CreateTask from "./pages/createTask/CreateTask";
+import Tasks from "./pages/tasks/Tasks";
+import Profile from "./pages/profile/Profile";
 
 function App() {
   const { token } = useContext(Context);
@@ -25,7 +27,7 @@ function App() {
           ></Route>
           <Route
             path="/"
-            element={token ? <Layout /> : <Navigate to="/login" />}
+            element={token ? <Home /> : <Navigate to="/login" />}
           ></Route>
           <Route
             path="/register"
@@ -42,6 +44,20 @@ function App() {
                 <Navigate to="/" />
               )
             }
+          ></Route>
+          <Route
+            path="/tasks"
+            element={
+              token && typeUser === "admin" ? <Tasks /> : <Navigate to="/" />
+            }
+          ></Route>
+          <Route
+            path="/tasks/:id"
+            element={token ? <Tasks /> : <Navigate to="/" />}
+          ></Route>
+          <Route
+            path="/profile"
+            element={token ? <Profile /> : <Navigate to="/" />}
           ></Route>
         </Routes>
       </BrowserRouter>

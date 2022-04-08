@@ -5,6 +5,7 @@ import config from "./config";
 import usersRoutes from "./routes/users.routes";
 import tasksRoutes from "./routes/tasks.routes";
 import authRoutes from "./routes/auth.routes";
+import path from "path";
 
 // Create app
 const app = express();
@@ -21,6 +22,7 @@ app.use(
     tempFileDir: "./src/upload",
   })
 );
+app.use("/images", express.static(path.join(__dirname, "/upload")));
 
 // Routes
 app.use(authRoutes);

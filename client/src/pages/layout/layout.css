@@ -4,5 +4,7 @@
 }
 
 .sidebar{
-  min-height: calc(100vh - 3.9rem);
+  min-height: calc(100vh - 4.22rem);
+  max-height: calc(100vh - 4.22rem);
+  top: 4.22rem;
 }

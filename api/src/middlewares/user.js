@@ -86,15 +86,6 @@ export const validateUpdate = [
     .withMessage("The password must have 5 characters minimum up to 50"),
   check("photo").optional().notEmpty(),
   check("email").exists().notEmpty().isEmail(),
-  check("typeUser")
-    .exists()
-    .notEmpty()
-    .custom((value, { req }) => {
-      if (value !== "admin" && value !== "operator") {
-        throw new Error("Type of user no validate");
-      }
-      return true;
-    }),
   (req, res, next) => {
     validateResult(req, res, next);
   },

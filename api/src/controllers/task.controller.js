@@ -2,7 +2,7 @@ import Task from "./../models/Task";
 
 export const getTasks = async (req, res) => {
   try {
-    const tasks = await Task.findAll();
+    const tasks = await Task.findAll({ include: ["users"] });
     res.status(200).json(tasks);
   } catch (error) {
     return res.status(500).json(error.message);
@@ -16,6 +16,7 @@ export const getTasksUser = async (req, res) => {
       where: {
         assigned_to: id,
       },
+      include: ["users"],
     });
     res.status(200).json(task);
   } catch (error) {
@@ -68,10 +69,11 @@ export const changeStatus = async (req, res) => {
         status,
       },
       {
-        where: { id },
+        where: { id: parseInt(id) },
+        order: ["updatedat", "DESC"],
       }
     );
-    return res.status(500).json("Task updated");
+    return res.status(200).json("Task updated");
   } catch (error) {
     return res.status(500).json(error.message);
   }
