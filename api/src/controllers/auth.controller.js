@@ -20,14 +20,16 @@ export const login = async (req, res) => {
     const { user } = req;
     const response = await user.comparePassword(req.body.password);
     if (!response) {
-      return res.status(403).json([
-        {
-          value: req.body.password,
-          msg: "The user does exist",
-          param: "password",
-          location: "body",
-        },
-      ]);
+      return res.status(403).json({
+        errors: [
+          {
+            value: req.body.password,
+            msg: "Incorrect password",
+            param: "password",
+            location: "body",
+          },
+        ],
+      });
     }
     const token = jwt.sign(
       { id: user.id, typeUser: user.type_user },
