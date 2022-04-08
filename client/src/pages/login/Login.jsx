@@ -66,10 +66,10 @@ const Login = () => {
             </div>
             <button
               type="submit"
-              className={`btn btn-primary ${isFetching && "disabled"}`}
+              className={`btn btn-dark ${isFetching && "disabled"}`}
               disabled={isFetching}
             >
-              Submit
+              Login
             </button>
           </form>
         </div>
