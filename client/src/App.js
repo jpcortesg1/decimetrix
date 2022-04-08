@@ -6,10 +6,15 @@ import Home from "./pages/home/Home";
 import Layout from "./pages/layout/Layout";
 import Login from "./pages/login/Login";
 import Register from "./pages/register/Register";
+import CreateTask from "./pages/createTask/CreateTask";
 
 function App() {
   const { token } = useContext(Context);
-  const { typeUser } = jwt_decode(token);
+  let typeUser;
+  if (token) {
+    const decode = jwt_decode(token);
+    typeUser = decode.typeUser;
+  }
   return (
     <div className="App">
       <BrowserRouter>
@@ -26,6 +31,16 @@ function App() {
             path="/register"
             element={
               token && typeUser === "admin" ? <Register /> : <Navigate to="/" />
+            }
+          ></Route>
+          <Route
+            path="/createTask"
+            element={
+              token && typeUser === "admin" ? (
+                <CreateTask />
+              ) : (
+                <Navigate to="/" />
+              )
             }
           ></Route>
         </Routes>

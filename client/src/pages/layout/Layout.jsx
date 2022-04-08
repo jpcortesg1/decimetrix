@@ -44,7 +44,7 @@ const Layout = ({ children }) => {
                     </span>
                   </Link>
 
-                  <Link className="link mb-2" to="/newTask">
+                  <Link className="link mb-2" to="/createTask">
                     <span className="navbar-brand fs-5">
                       <i className="fa-solid fa-plus me-2"></i>
                       New Task

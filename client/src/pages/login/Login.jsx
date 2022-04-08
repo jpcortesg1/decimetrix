@@ -3,6 +3,7 @@ import axios from "axios";
 import { Context } from "../../context/Context";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Input from "../../components/input/Input";
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -36,39 +37,21 @@ const Login = () => {
       <div className="row">
         <div className="col-md-6 offset-md-3">
           <form onSubmit={handleSubmit}>
-            <div className="mb-3">
-              <label htmlFor="username" className="form-label">
-                Username
-              </label>
-              <input
-                type="text"
-                className="form-control"
-                id="username"
-                autoComplete="off"
-                onChange={(e) => {
-                  setUsername(e.target.value);
-                }}
-                required
-              />
-            </div>
-            <div className="mb-3">
-              <label htmlFor="password" className="form-label">
-                Password
-              </label>
-              <input
-                type="password"
-                className="form-control"
-                id="password"
-                onChange={(e) => {
-                  setPassword(e.target.value);
-                }}
-                required
-              />
-            </div>
+            <Input
+              value={username}
+              setValue={setUsername}
+              type={"text"}
+              label={"Username"}
+            />
+            <Input
+              value={password}
+              setValue={setPassword}
+              type={"password"}
+              label={"Password"}
+            />
             <button
               type="submit"
               className={`btn btn-dark ${isFetching && "disabled"}`}
-              disabled={isFetching}
             >
               Login
             </button>

@@ -4,6 +4,7 @@ import axios from "axios";
 import { Context } from "../../context/Context";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Input from "../../components/input/Input";
 
 const Register = () => {
   const { token } = useContext(Context);
@@ -49,69 +50,31 @@ const Register = () => {
         <ToastContainer />
         <h1 className="text-center my-5">Register New User</h1>
         <form onSubmit={handleSubmit}>
-          <div className="mb-3">
-            <label htmlFor="username" className="form-label">
-              Username
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              id="username"
-              value={username}
-              onChange={(e) => {
-                setUsername(e.target.value);
-              }}
-              required
-              autoComplete="off"
-            />
-          </div>
-          <div className="mb-3">
-            <label htmlFor="password" className="form-label">
-              Password
-            </label>
-            <input
-              type="password"
-              className="form-control"
-              id="password"
-              value={password}
-              onChange={(e) => {
-                setPassword(e.target.value);
-              }}
-              required
-            />
-          </div>
-          <div className="mb-3">
-            <label htmlFor="email" className="form-label">
-              Email
-            </label>
-            <input
-              type="Email"
-              className="form-control"
-              id="email"
-              value={email}
-              onChange={(e) => {
-                setEmail(e.target.value);
-              }}
-              required
-              autoComplete="off"
-            />
-          </div>
-          <div className=" mb-3">
-            <label className="form-label" htmlFor="typeUser">
-              Options
-            </label>
-            <select
-              className="form-select"
-              id="typeUser"
-              onChange={(e) => {
-                setTypeUser(e.target.value);
-              }}
-            >
-              <option defaultValue>Select value</option>
-              <option value="operator">Operator</option>
-              <option value="admin">Admin</option>
-            </select>
-          </div>
+          <Input
+            value={username}
+            setValue={setUsername}
+            type={"text"}
+            label={"Username"}
+          />
+          <Input
+            value={password}
+            setValue={setPassword}
+            type={"password"}
+            label={"Password"}
+          />
+          <Input
+            value={email}
+            setValue={setEmail}
+            type={"email"}
+            label={"Email"}
+          />
+          <Input
+            value={typeUser}
+            setValue={setTypeUser}
+            type={"select"}
+            label={"Type of user"}
+            options={[["admin", "Admin"], ["operator", "Operator"]]}
+          />
           <button type="submit" className={`btn btn-dark`}>
             Register
           </button>
