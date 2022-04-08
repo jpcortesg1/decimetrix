@@ -39,5 +39,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:4000/"
+  "proxy": "https://afternoon-fortress-75389.herokuapp.com/"
 }

@@ -3,7 +3,6 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { Context } from "./context/Context";
 import jwt_decode from "jwt-decode";
 import Home from "./pages/home/Home";
-import Layout from "./pages/layout/Layout";
 import Login from "./pages/login/Login";
 import Register from "./pages/register/Register";
 import CreateTask from "./pages/createTask/CreateTask";

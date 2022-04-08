@@ -32,7 +32,7 @@ const CreateTask = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post(
+      await axios.post(
         "/tasks",
         {
           message,
