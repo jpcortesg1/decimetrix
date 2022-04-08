@@ -53,7 +53,7 @@ const Layout = ({ children }) => {
 
                   <Link className="link mb-2" to="/tasks">
                     <span className="navbar-brand fs-5">
-                      <i class="fa-solid fa-file me-2"></i>
+                      <i className="fa-solid fa-file me-2"></i>
                       Task Report
                     </span>
                   </Link>
@@ -69,7 +69,7 @@ const Layout = ({ children }) => {
                 <>
                   <Link className="link mb-2" to={`/tasks/${id}`}>
                     <span className="navbar-brand fs-5">
-                      <i class="fa-solid fa-file me-2"></i>
+                      <i className="fa-solid fa-file me-2"></i>
                       Profile
                     </span>
                   </Link>
@@ -79,7 +79,9 @@ const Layout = ({ children }) => {
           </div>
         </div>
 
-        <div className="col-md-10">{children}</div>
+        <div className="col-md-10">
+          <div className="container">{children}</div>
+        </div>
       </div>
     </>
   );

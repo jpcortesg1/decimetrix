@@ -44,6 +44,7 @@ const Login = () => {
                 type="text"
                 className="form-control"
                 id="username"
+                autoComplete="off"
                 onChange={(e) => {
                   setUsername(e.target.value);
                 }}
