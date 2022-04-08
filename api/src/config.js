@@ -10,6 +10,7 @@ const hostDb = process.env.HOST_DB || "";
 const portDb = process.env.PORT_DB || "";
 const nameDb = process.env.NAME_DB || "";
 const secretKey = process.env.SECRET_KEY || "secretkey";
+const databaseUrl = process.env.DATABASE_URL;
 
 export default {
   port,
@@ -19,4 +20,5 @@ export default {
   portDb,
   nameDb,
   secretKey,
+  databaseUrl,
 };
