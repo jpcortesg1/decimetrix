@@ -18,7 +18,7 @@ const CreateTask = () => {
   useEffect(() => {
     const getOperators = async () => {
       try {
-        const { data } = await axios.get("/users/operators", {
+        const { data } = await axios.get("https://afternoon-fortress-75389.herokuapp.com/users/operators", {
           headers: { authorization: `Bearer ${token}` },
         });
         setOperators(data.map((user) => [user.id, user.username]));
@@ -33,7 +33,7 @@ const CreateTask = () => {
     e.preventDefault();
     try {
       await axios.post(
-        "/tasks",
+        "https://afternoon-fortress-75389.herokuapp.com/tasks",
         {
           message,
           status,

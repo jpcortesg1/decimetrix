@@ -17,7 +17,7 @@ const Task = ({ task, deleteTask }) => {
       try {
         if (status !== task.status && status !== "") {
           await axios.put(
-            `/tasks/status/${task.id}`,
+            `https://afternoon-fortress-75389.herokuapp.com/tasks/status/${task.id}`,
             {
               status,
             },
@@ -45,7 +45,7 @@ const Task = ({ task, deleteTask }) => {
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`/tasks/${task.id}`, {
+      await axios.delete(`https://afternoon-fortress-75389.herokuapp.com/tasks/${task.id}`, {
         headers: { authorization: `Bearer ${token}` },
       });
       deleteTask(task.id);
