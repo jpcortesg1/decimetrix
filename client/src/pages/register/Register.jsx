@@ -17,7 +17,7 @@ const Register = () => {
     e.preventDefault();
     try {
       const { data } = await axios.post(
-        "https://afternoon-fortress-75389.herokuapp.com/auth/register",
+        "/auth/register",
         {
           username,
           password,

@@ -21,7 +21,7 @@ const Profile = () => {
   useEffect(() => {
     const getUser = async () => {
       try {
-        const { data } = await axios.get(`https://afternoon-fortress-75389.herokuapp.com/users/${id}`, {
+        const { data } = await axios.get(`/users/${id}`, {
           headers: {
             authorization: `Bearer ${token}`,
           },
@@ -49,7 +49,7 @@ const Profile = () => {
     if (password !== "") data.append("password", password);
     if (typeof image === "object") data.append("photo", image);
     try {
-      await axios.put(`https://afternoon-fortress-75389.herokuapp.com/users/${id}`, data, {
+      await axios.put(`/users/${id}`, data, {
         headers: { authorization: `Bearer ${token}` },
       });
       toast.success(`User ${username} updated successfully`, {

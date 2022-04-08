@@ -14,7 +14,7 @@ const Login = () => {
     e.preventDefault();
     dispatch({ type: "LOGIN_START" });
     try {
-      const { data } = await axios.post("https://afternoon-fortress-75389.herokuapp.com/auth/login", {
+      const { data } = await axios.post("/auth/login", {
         username,
         password,
       });

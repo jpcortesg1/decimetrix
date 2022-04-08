@@ -23,7 +23,7 @@ const Tasks = () => {
     const getTasks = async () => {
       let result;
       if (typeUser === "operator")
-        result = await axios.get(`https://afternoon-fortress-75389.herokuapp.com/tasks/${id}`, {
+        result = await axios.get(`/tasks/${id}`, {
           headers: {
             authorization: `Bearer ${token}`,
           },
